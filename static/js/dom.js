@@ -40,9 +40,10 @@ export let dom = {
                 <button class="board-toggle"><i class="fas fa-chevron-down"></i></button>
             </div></section>`;
             dom.loadStatusesByBoardId(`${board.id}`);
+            dom.loadCards(`${board.id}`)
 
         }
-        console.log("boardList",boardList);
+        console.log("boardList", boardList);
         this._appendToElement(document.querySelector('.board-container'), boardList);
     },
 
@@ -55,26 +56,42 @@ export let dom = {
 
     showStatusesByBoardId: function (boardID, statuses) {
         let statusList = '';
-        statusList +='<div class="board-columns">';
+        statusList += '<div class="board-columns">';
         for (let status of statuses) {
             statusList +=
                 `<div id="status-${status.id}" class="board-column">
                     <div class="board-column-title">${status.name}</div>
                     <div class="board-column-content"></div>
                 </div>`;
-
-
         }
-        statusList +='</div>';
+        statusList += '</div>';
         //console.log(statusList);
         this._appendToElement(document.querySelector('#board-' + boardID), statusList);
     },
     loadCards: function (boardId) {
+        dataHandler.getCardsByBoardId(boardId, function (cards) {
+            dom.showCards(cards)
+
+        })
         // retrieves cards and makes showCards called
     },
     showCards: function (cards) {
+        let cardList = '';
+        for (let card of cards) {
+            cardList +=
+            `<div class="card">
+                <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
+                <div class="card-title">${card.name}</div>
+                </div>`;
+        }
+        cardList += '</div>';
+        this._appendToElement(document.querySelector('#status-'+8), cardList)
         // shows the cards of a board
         // it adds necessary event listeners also
     },
     // here comes more features
 };
+// <div class="card">
+// <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
+// <div class="card-title">Card 1</div>
+// </div>
