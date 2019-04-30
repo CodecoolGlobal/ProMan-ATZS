@@ -41,9 +41,8 @@ export let dataHandler = {
     getStatus: function (statusId, callback) {
         // the status is retrieved and then the callback function is called with the status
     },
-    getCardsByBoardId: function (boardId, callback) {
-        console.log('asd', boardId);
-        this._api_get('/get-cards/' + boardId, (response) => {
+    getCardsByStatusId: function (statusID, callback) {
+        this._api_get('/get-cards/' + statusID, (response) => {
             this._data = response;
             callback(response)
         });
@@ -51,9 +50,7 @@ export let dataHandler = {
     },
     getStatusesByBoardId: function (boardId, callback) {
         this._api_get('/get-statuses/' + boardId, (response) => {
-            console.log(typeof boardId);
             this._data = response;
-            console.log('response', response);
             callback(response);
         });
     },
