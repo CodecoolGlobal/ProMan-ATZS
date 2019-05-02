@@ -27,6 +27,9 @@ def get_statuses():
     return persistence.get_statuses()
 
 
+def add_new_boards(board_title):
+    persistence.add_new_boards(board_title)
+
 def get_cards_for_board(status_id):
     persistence.clear_cache()
     all_cards = persistence.get_all_data_from_all_boards()

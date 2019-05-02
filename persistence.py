@@ -43,34 +43,29 @@ def _get_all_data(cursor):
 # BOARDS_FILE = './data/boards.csv'
 # CARDS_FILE = './data/cards.csv'
 
+@connection.connection_handler
+def _get_id_by_name(cursor, table, name):
+    cursor.execute(
+        sql.SQL("""SELECT id FROM {table} 
+                WHERE name = %(name)s """).format(table=sql.Identifier(table)), {'name': name})
+
+    table_id = cursor.fetchone()
+    return table_id
+
+@connection.connection_handler
+def add_new_boards(cursor, board_title):
+    cursor.execute(
+        "INSERT INTO boards (name) VALUES (%(board_title)s)", {'board_title': board_title})
+    new_board_id = _get_id_by_name('boards', board_title)['id']
+
+    cursor.execute(
+        "INSERT INTO statuses (name, board_id) VALUES ('kolyok1', %(new_board_id)s)", {'new_board_id':new_board_id})
+    cursor.execute(
+        "INSERT INTO statuses (name, board_id) VALUES ('kolyok2', %(new_board_id)s)", {'new_board_id':new_board_id})
+    cursor.execute(
+        "INSERT INTO statuses (name, board_id) VALUES ('kolyok3', %(new_board_id)s)", {'new_board_id':new_board_id})
+
 _cache = {}  # We store cached data in this dict to avoid multiple file readings
-
-
-# def _read_csv(file_name):
-#     """
-#     Reads content of a .csv file
-#     :param file_name: relative path to data file
-#     :return: OrderedDict
-#     """
-#     with open(file_name) as boards:
-#         rows = csv.DictReader(boards, delimiter=',', quotechar='"')
-#         formatted_data = []
-#         for row in rows:
-#             formatted_data.append(dict(row))
-#         return formatted_data
-
-
-# def _get_data(data_type, file, force):
-#     """
-#     Reads defined type of data from file or cache
-#     :param data_type: key where the data is stored in cache
-#     :param file: relative path to data file
-#     :param force: if set to True, cache will be ignored
-#     :return: OrderedDict
-#     """
-#     if force or data_type not in _cache:
-#         _cache[data_type] = _read_csv(file)
-#     return _cache[data_type]
 
 
 def clear_cache():
