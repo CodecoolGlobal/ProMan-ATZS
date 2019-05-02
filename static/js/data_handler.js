@@ -69,7 +69,6 @@ export let dataHandler = {
         let favBoards = document.querySelectorAll('.board-toggle');
         favBoards.forEach((board) => {
             board.addEventListener('click', function (e) {
-                console.log(e.target.parentElement.nextElementSibling);
                 if (e.target.parentElement.parentElement.nextElementSibling.classList.contains('hide')) {
                     e.target.parentElement.parentElement.nextElementSibling.classList.replace('hide', 'show')
 
@@ -78,6 +77,18 @@ export let dataHandler = {
                 }
             })
         })
+    },
+
+    deleteCards: function(){
+        let trashes = document.querySelectorAll('.card-remove');
+        trashes.forEach((trash) => {
+            trash.addEventListener('click', function(e){
+                console.log('hihi');
+                e.target.parentElement.parentElement.parentElement.remove();
+            })
+        })
+
+
     }
 };
 
