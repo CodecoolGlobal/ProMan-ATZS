@@ -69,15 +69,26 @@ export let dataHandler = {
         let favBoards = document.querySelectorAll('.board-toggle');
         favBoards.forEach((board) => {
             board.addEventListener('click', function (e) {
-                console.log(e.target.parentElement.nextElementSibling);
-                if (e.target.parentElement.nextElementSibling.classList.contains('hide')) {
-                    e.target.parentElement.nextElementSibling.classList.replace('hide', 'show')
+                if (e.target.parentElement.parentElement.nextElementSibling.classList.contains('hide')) {
+                    e.target.parentElement.parentElement.nextElementSibling.classList.replace('hide', 'show')
 
                 } else {
-                    e.target.parentElement.nextElementSibling.classList.replace('show', 'hide')
+                    e.target.parentElement.parentElement.nextElementSibling.classList.replace('show', 'hide')
                 }
             })
         })
+    },
+
+    deleteCards: function(){
+        let trashes = document.querySelectorAll('.card-remove');
+        trashes.forEach((trash) => {
+            trash.addEventListener('click', function(e){
+                console.log('hihi');
+                e.target.parentElement.parentElement.parentElement.remove();
+            })
+        })
+
+
     }
 };
 

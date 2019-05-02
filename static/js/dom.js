@@ -45,7 +45,6 @@ export let dom = {
 
         }
         this._appendToElement(document.querySelector('.board-container'), boardList);
-        console.log(document.querySelectorAll('.board-toggle'));
         dataHandler.boardsShowHide();
 
     },
@@ -89,6 +88,7 @@ export let dom = {
         }
         cardList += '</div>';
         this._appendToElement(document.querySelector('#status-' + statusID, '.board-column-content'), cardList)
+        dataHandler.deleteCards();
         // shows the cards of a board
         // it adds necessary event listeners also
     },

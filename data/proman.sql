@@ -72,7 +72,7 @@ INSERT INTO statuses VALUES (6, 'done2', 5);
 INSERT INTO statuses VALUES (7, 'done3', 5);
 INSERT INTO statuses VALUES (8, 'done4', 4);
 INSERT INTO statuses VALUES (9, 'done5', 3);
-SELECT pg_catalog.setval('statuses_id_seq', 2, true);
+SELECT pg_catalog.setval('statuses_id_seq', 9, true);
 
 INSERT INTO cards VALUES (1, 'environment', 1);
 INSERT INTO cards VALUES (2, 'something', 2);
