@@ -8,10 +8,33 @@ def _get_data(cursor, table):
     :return: list of ordered dicts
     """
     cursor.execute(
-        sql.SQL("SELECT * FROM {table} ").format(table=sql.Identifier(table))
-    )
+        sql.SQL('''SELECT * FROM {table}''').format(table=sql.Identifier(table)))
     table_data = cursor.fetchall()
     return table_data
+
+
+@connection.connection_handler
+def _get_all_data(cursor):
+    """
+    :return: list of ordered dicts
+    """
+    cursor.execute(
+        sql.SQL('''
+                SELECT 
+                    boards.id AS board_id,
+                    boards.name AS board_name,
+                    statuses.id AS status_id,
+                    statuses.name AS status_name,
+                    cards.id AS card_id,
+                    cards.name AS card_name
+                FROM boards
+                INNER JOIN statuses 
+                    ON boards.id = statuses.board_id
+                INNER JOIN cards 
+                    ON cards.status_id = statuses.id
+                '''))
+    all_table_data = cursor.fetchall()
+    return all_table_data
 
 
 # import csv
@@ -65,6 +88,10 @@ def get_boards():
 
 def get_cards():
     return _get_data('cards')
+
+
+def get_all_data_from_all_boards():
+    return _get_all_data()
 
 # def get_cards(force=False):
 # return _get_data('cards', CARDS_FILE, force)
