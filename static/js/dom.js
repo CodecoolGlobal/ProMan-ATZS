@@ -32,7 +32,7 @@ export let dom = {
         // it adds necessary event listeners also
 
         let boardList = '';
-        // boardList+=`<button id="new-board" class="board-add">Add Board</button>`;
+        boardList+=`<button id="new-board" class="board-add">Add Board</button>`;
 
 
 
