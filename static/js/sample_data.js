@@ -1,6 +1,8 @@
 // It is just an idea how you can structure your data during your page is running.
 // You can use it for testing purposes by simply copy/paste/run in the Console tab in your browser
 
+import {dataHandler} from "./data_handler";
+
 let keyInLocalStorage = 'proman-data';
 
 let sampleData = {
@@ -81,4 +83,13 @@ let sampleData = {
 };
 
 localStorage.setItem(keyInLocalStorage, JSON.stringify(sampleData));
+/*
+        boardList+=`<button id="new-board" class="board-add">Add Board</button>`;
+        let newBoardButton = document.querySelector('#new-board');
+        newBoardButton.addEventListener('click', function(event){
 
+            dataHandler.createNewBoard()
+        });
+
+
+ */

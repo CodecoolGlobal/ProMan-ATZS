@@ -32,6 +32,9 @@ export let dom = {
         // it adds necessary event listeners also
 
         let boardList = '';
+        boardList+=`<button id="new-board" class="board-add">Add Board</button>`;
+
+
 
         for (let board of boards) {
             boardList += `<section class="board" id="board-${board.id}">
@@ -42,8 +45,15 @@ export let dom = {
             dom.loadStatusesByBoardId(`${board.id}`);
 
         }
-        console.log("boardList",boardList);
         this._appendToElement(document.querySelector('.board-container'), boardList);
+        let newBoardButton = document.querySelector('#new-board');
+        newBoardButton.addEventListener('click', function(){
+            dataHandler.createNewBoard('Kiskutya', function () {
+
+            });
+
+        });
+
     },
 
 

@@ -27,6 +27,9 @@ def get_statuses():
     return persistence.get_statuses()
 
 
+def add_new_boards(board_title):
+    persistence.add_new_boards(board_title)
+
 def get_cards_for_board(board_id):
     persistence.clear_cache()
     all_cards = persistence.get_cards()
@@ -46,3 +49,6 @@ def get_statuses_for_board(board_id):
         if status['board_id'] == board_id:
             matching_statuses.append(status)
     return matching_statuses
+
+
+

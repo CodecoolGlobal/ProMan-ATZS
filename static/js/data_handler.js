@@ -17,8 +17,13 @@ export let dataHandler = {
             .then(json_response => callback(json_response));  // Call the `callback` with the returned object
     },
     _api_post: function (url, data, callback) {
-        // it is not called from outside
-        // sends the data to the API, and calls callback function
+        fetch(url, {
+            method: 'POST', // or 'PUT'
+            body: JSON.stringify(data), // data can be `string` or {object}!
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
     },
     init: function () {
     },
@@ -33,6 +38,10 @@ export let dataHandler = {
         });
     },
     getBoard: function (boardId, callback) {
+        this._api_get('/get-boards', (response) => {
+            this._data = response[-1];
+            callback(response);
+        });
         // the board is retrieved and then the callback function is called with the board
     },
     getStatuses: function (callback) {
@@ -46,9 +55,7 @@ export let dataHandler = {
     },
     getStatusesByBoardId: function (boardId, callback) {
         this._api_get('/get-statuses/' + boardId, (response) => {
-            console.log(typeof boardId);
             this._data = response;
-            console.log('response', response);
             callback(response);
         });
     },
@@ -56,7 +63,8 @@ export let dataHandler = {
         // the card is retrieved and then the callback function is called with the card
     },
     createNewBoard: function (boardTitle, callback) {
-        // creates new board, saves it and calls the callback function with its data
+
+        this._api_post('/new-board', boardTitle, callback  )
     },
     createNewCard: function (cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
