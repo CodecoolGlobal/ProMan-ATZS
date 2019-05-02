@@ -70,11 +70,11 @@ export let dataHandler = {
         favBoards.forEach((board) => {
             board.addEventListener('click', function (e) {
                 console.log(e.target.parentElement.nextElementSibling);
-                if (e.target.parentElement.nextElementSibling.classList.contains('hide')) {
-                    e.target.parentElement.nextElementSibling.classList.replace('hide', 'show')
+                if (e.target.parentElement.parentElement.nextElementSibling.classList.contains('hide')) {
+                    e.target.parentElement.parentElement.nextElementSibling.classList.replace('hide', 'show')
 
                 } else {
-                    e.target.parentElement.nextElementSibling.classList.replace('show', 'hide')
+                    e.target.parentElement.parentElement.nextElementSibling.classList.replace('show', 'hide')
                 }
             })
         })
