@@ -37,13 +37,17 @@ export let dom = {
             boardList += `<section class="board" id="board-${data.board_id}">
             <div data-board-id="${data.board_id}"  class="board-header"><span class="board-title">${data.board_name}</span>
                 <button class="board-add">Add Card</button>
-                <button class="board-toggle"><i class="fas fa-chevron-down"></i></button>
+                <button class="board-toggle" ><i class="fas fa-chevron-down"></i></button>
             </div></section>`;
             dom.loadStatusesByBoardId(`${data.board_id}`);
-            dom.loadCardsByStatusId(`${data.status_id}`)
+            dom.loadCardsByStatusId(`${data.status_id}`);
+
 
         }
         this._appendToElement(document.querySelector('.board-container'), boardList);
+        console.log(document.querySelectorAll('.board-toggle'));
+        dataHandler.boardsShowHide();
+
     },
 
 
@@ -55,7 +59,7 @@ export let dom = {
 
     showStatusesByBoardId: function (boardID, statuses) {
         let statusList = '';
-        statusList += '<div class="board-columns">';
+        statusList += '<div class="board-columns show">';
         for (let status of statuses) {
             statusList +=
                 `<div id="status-${status.id}" class="board-column">
@@ -94,3 +98,4 @@ export let dom = {
 // <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
 // <div class="card-title">Card 1</div>
 // </div>
+
